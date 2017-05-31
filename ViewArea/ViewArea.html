@@ -1,0 +1,31 @@
+﻿<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>ViewArea  判断可视区域（常用于css3动画）</title>
+    <style>
+        #box{
+            height: 300px;
+            width: 300px;
+            background-color: #ccc;
+        }
+    </style>
+</head>
+<div id="box"></div>
+<body>
+    <script type="text/javascript" src="../vendor/jquery.js"></script>
+    <script type="text/javascript" src="viewArea.js"></script>
+    <script>
+        $("#box").viewarea({
+            inFn: function (element) {
+                //移入可视区域callback
+                $(element).text("看得见");
+            },
+            outFn: function (element) {
+                //移出可视区域callback
+                alert("看不见");
+            }
+        });
+    </script>
+</body>
+</html>
