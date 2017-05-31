@@ -1,0 +1,39 @@
+﻿<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>ViewArea  判断可视区域（常用于css3动画）</title>
+    <style>
+        #minute,#second{
+            height: 300px;
+            width: 300px;
+            background-color: #ccc;
+            display: inline-block;
+            text-align: center;
+            line-height: 300px;
+            font-size: 30px;
+        }
+    </style>
+</head>
+<div id="minute"></div>
+<div id="second"></div>
+<body>
+    <script type="text/javascript" src="../vendor/jquery.js"></script>
+    <script type="text/javascript" src="timer.js"></script>
+    <script>
+        intDiff({
+            initTime :5,   //初始化时间单位毫秒
+            inFn :function (value) {
+                //定时器执行时所要执行方法
+                console.log(value);
+                $("#minute").text(value.minute);
+                $("#second").text(value.second);
+            },
+            endFn :function () {
+                //定时器结束时所要执行方法
+                alert("It's ending");
+            }
+        });
+    </script>
+</body>
+</html>
