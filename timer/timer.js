@@ -1,5 +1,5 @@
 /**
- * @intDiff
+ * @timer
  * @author Tyrone Yves Chen
  * @version 1.0
  * @description 定时器
