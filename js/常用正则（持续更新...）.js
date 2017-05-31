@@ -7,19 +7,24 @@
  * @PS：汤圆萌萌哒~
  */
 ;(function () {
-    /*JQ  AJAX*/
-    function AjaxComponent(url,data) {
-        this.type = 'post';
-        this.async = true;
-        if(data) this.data = data;
-        this.url = AJAX_URL + url;
-        this.error = function(e) {
-            console.log(e);
-        };
-        this.run = function () {
-            //console.log(this);
-            $.ajax(this);
+    /*英文字数统计*/
+    function countKeywords(text,id){
+        var t_keywords = text.replace(/[^a-zA-Z0-9]+/g,'#@#@#@#@#@');
+        var arr = t_keywords.split('#@#@#@#@#@');
+        var count=0;
+        for(var i=0;i<arr.length;i++){
+            if(arr[i]!=""){
+                count++;
+            }
         }
+        $("#"+id).text(count);
     }
 
-})(window.jQuery);
+
+    /*正则去掉字符串中的[""]*/
+    function answerRegExp(str) {
+        var str = str;
+        str = str.replace(/[\([\"\])]/g,"");
+        return str;
+    }
+})();
