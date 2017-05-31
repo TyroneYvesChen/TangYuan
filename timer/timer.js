@@ -17,13 +17,13 @@
     };
  */
 
-    function intDiff(options){
+    function timer(options){
         var options = options,
             initTime = options.initTime ? options.initTime : 0,
             inFn = options.inFn,
             endFn = options.endFn;
 
-        var timer = window.setInterval(function(){
+        var timerId = window.setInterval(function(){
             var minute = 0,
                 second = 0;//时间默认值
             if(initTime > 0){
@@ -40,7 +40,7 @@
                 inFn && typeof inFn == "function" ? inFn(val) : "";
             }
             else if (initTime == 0) {
-                clearInterval(timer);
+                clearInterval(timerId);
                 endFn && typeof endFn == "function" ? endFn() : "";
             }
             initTime --;
