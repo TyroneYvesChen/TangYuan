@@ -3,7 +3,7 @@
  * @author Tyrone Yves Chen
  * @version 1.0
  * @description 判断可视区域（常用于css3动画）
- * @disclaimer 我只是代码的搬运工，借鉴与网上各位大佬的代码修改后在项目中使用，如有雷同，纯属巧合
+ * @disclaimer 我只是代码的搬运工，借鉴于网上各位大佬的代码修改后在项目中使用，如有雷同，纯属巧合
  * @PS：汤圆萌萌哒~
  */
 ;(function ($) {
