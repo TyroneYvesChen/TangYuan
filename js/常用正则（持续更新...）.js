@@ -6,25 +6,26 @@
  * @disclaimer 我只是代码的搬运工，借鉴于网上各位大佬的代码修改后在项目中使用，如有雷同，纯属巧合
  * @PS：汤圆萌萌哒~
  */
-;(function () {
-    /*英文字数统计*/
-    function countKeywords(text,id){
-        var t_keywords = text.replace(/[^a-zA-Z0-9]+/g,'#@#@#@#@#@');
-        var arr = t_keywords.split('#@#@#@#@#@');
-        var count=0;
-        for(var i=0;i<arr.length;i++){
-            if(arr[i]!=""){
-                count++;
+
+
+
+        /*英文字数统计*/
+        function countKeywords(text,id){
+            var t_keywords = text.replace(/[^a-zA-Z0-9]+/g,'#@#@#@#@#@');
+            var arr = t_keywords.split('#@#@#@#@#@');
+            var count=0;
+            for(var i=0;i<arr.length;i++){
+                if(arr[i]!=""){
+                    count++;
+                }
             }
+            $("#"+id).text(count);
         }
-        $("#"+id).text(count);
-    }
 
 
-    /*正则去掉字符串中的[""]*/
-    function answerRegExp(str) {
-        var str = str;
-        str = str.replace(/[\([\"\])]/g,"");
-        return str;
-    }
-})();
+        /*正则去掉字符串中的[""]*/
+        function answerRegExp(str) {
+            var str = str;
+            str = str.replace(/[\([\"\])]/g,"");
+            return str;
+        }
