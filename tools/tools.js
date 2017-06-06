@@ -51,4 +51,34 @@
         }
     }
 
+    /*判断对象是否为空*/
+    function isEmptyObject(obj) {
+        for (var key in obj) {
+            return false;
+        }
+        return true;
+    }
+
+
+    //深度克隆对象
+    function objClone(obj) {
+        var result = {};
+        for (var key in obj){
+            result[key] = obj[key];
+        }
+        return result;
+    }
+
+
+    //删除数组中指定项
+    function delArray(myArray, data) {
+        var newArr = [];
+        for(var i=0;i<=myArray.length-1;i++){
+            if(myArray[i] != data){
+                newArr.push(myArray[i]);
+            }
+        }
+        return newArr;
+    }
+
 })();
