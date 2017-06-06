@@ -9,20 +9,18 @@
  * ajax.success = function (data){}
  * ajax.run();
  */
-;(function () {
-    /*JQ  AJAX*/
-    function AjaxComponent(url,data) {
-        this.type = 'post';
-        this.async = true;
-        if(data) this.data = data;
-        this.url = AJAX_URL + url;
-        this.error = function(e) {
-            console.log(e);
-        };
-        this.run = function () {
-            //console.log(this);
-            $.ajax(this);
-        }
-    }
 
-})();
+        /*JQ  AJAX*/
+        function AjaxComponent(url,data) {
+            this.type = 'post';
+            this.async = true;
+            if(data) this.data = data;
+            this.url = url;
+            this.error = function(e) {
+                console.log(e);
+            };
+            this.run = function () {
+                //console.log(this);
+                $.ajax(this);
+            }
+        }

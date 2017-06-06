@@ -1,0 +1,53 @@
+﻿<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>分页</title>
+    <style>
+        .pagelist {padding:10px 0; text-align:center;}
+        .pagelist span,.pagelist a{ border-radius:3px; border:1px solid #dfdfdf;display:inline-block; padding:5px 12px;}
+        .pagelist a{ margin:0 3px;}
+        .pagelist span.current{ background:#09F; color:#FFF; border-color:#09F; margin:0 2px;}
+        .pagelist a:hover{background:#09F; color:#FFF; border-color:#09F; }
+        .pagelist label{ padding-left:15px; color:#999;}
+        .pagelist label b{color:red; font-weight:normal; margin:0 3px;}
+        .pagelist input{
+            border: 1px solid #e0ded9;
+            border-radius: 3px;
+            margin: 0px 3px 0px 3px;
+            width: 50px;
+            height: 26px;
+            vertical-align: top;
+        }
+        .skipBtn{
+            cursor: pointer;
+        }
+    </style>
+</head>
+<div id="content"></div>
+<div id="item"></div>
+<body>
+    <script type="text/javascript" src="../vendor/jquery.js"></script>
+    <script type="text/javascript" src="../js/ajax-jq封装.js"></script>
+    <script type="text/javascript" src="pagination.js"></script>
+    <script>
+        Pagination.PARAM = { url: "pagination.json"};
+        $("#item").pagination({
+            //这里是参数
+        },callback);
+
+        function callback(data) {
+            console.log(data)
+            var _data = data.list,
+                    arr = [],
+                    dom = $('<div></div>');
+            _data.forEach(function (val) {
+                var tmd = dom.clone();
+                dom.text(val.content + val.number);
+                arr.push(tmd);
+            });
+            $("#content").append(arr);
+        }
+    </script>
+</body>
+</html>
