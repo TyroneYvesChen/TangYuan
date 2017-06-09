@@ -85,7 +85,22 @@
 
 
         //优雅安全的从深层数据结构中取值
-        //来源于https://juejin.im/post/590861b744d90400693a1891
+        /**
+         * 来源于https://juejin.im/post/590861b744d90400693a1891
+         * var props = {
+                    user: {
+                        posts: [
+                            { title: 'Foo', comments: [ 'Good one!', 'Interesting...' ] },
+                            { title: 'Bar', comments: [ 'Ok' ] },
+                            { title: 'Baz', comments: []}
+                        ],
+                        comments: [...]
+                    }
+                }
+         var getUserComments = getFromJsonAppointedValue(['user', 'posts', 0, 'comments'])
+         console.log(getUserComments(props))        // [ 'Good one!', 'Interesting...' ]
+         console.log(getUserComments({user:{posts: []}}))       // null
+         * */
         function getFromJsonAppointedValue(path) {
             return function (json) {
                 return path.reduce(function (xs, x) {
