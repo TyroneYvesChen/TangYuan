@@ -81,3 +81,22 @@
             }
             return newArr;
         }
+
+
+
+        //优雅安全的从深层数据结构中取值
+        //来源于https://juejin.im/post/590861b744d90400693a1891
+        function getFromJsonAppointedValue(path) {
+            return function (json) {
+                return path.reduce(function (xs, x) {
+                    return (xs && xs[x]) ? xs[x] : null;
+                }, json);
+            }
+        }
+
+
+
+
+
+
+
