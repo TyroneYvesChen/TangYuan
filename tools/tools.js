@@ -97,11 +97,11 @@
                         comments: [...]
                     }
                 }
-         var getUserComments = getFromJsonAppointedValue(['user', 'posts', 0, 'comments'])
+         var getUserComments = getAppointedValueFromJson(['user', 'posts', 0, 'comments'])
          console.log(getUserComments(props))        // [ 'Good one!', 'Interesting...' ]
          console.log(getUserComments({user:{posts: []}}))       // null
          * */
-        function getFromJsonAppointedValue(path) {
+        function getAppointedValueFromJson(path) {
             return function (json) {
                 return path.reduce(function (xs, x) {
                     return (xs && xs[x]) ? xs[x] : null;
@@ -112,8 +112,18 @@
 
 
 
+
+
+    // "userAgent 内容: <BR/>" + navigator.userAgent 
+    // "是否为移动终端: " + browser.versions.mobile 
+    // "是否 ios: " + browser.versions.ios 
+    // "是否 android: " + browser.versions.android 
+    //
+    //
+    //
+    // "当前浏览器: " + browser.bUA 
         
-        function distinguishBetweenMobileAndPC() {
+        function client_info() {
             var browser = {
                 versions: function() {
                     var u = navigator.userAgent,
@@ -165,14 +175,7 @@
         }
 
 
-    // $("#aa2").append("userAgent 内容: <BR/>" + navigator.userAgent + "<BR/><BR/>");
-    // $("#aa2").append("是否为移动终端: " + browser.versions.mobile + "<BR/>");
-    // $("#aa2").append("是否 ios: " + browser.versions.ios + "<BR/>");
-    // $("#aa2").append("是否 android: " + browser.versions.android + "<BR/>");
-    //
-    //
-    //
-    // $("#aa2").append("当前浏览器: " + bUA + "<BR/>");
+    
 
 
 

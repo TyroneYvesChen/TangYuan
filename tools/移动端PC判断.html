@@ -20,14 +20,24 @@
 </head>
 <body>
 <br>
-<input type="button"  value="浏览器版本信息" id="aass" />
+<input type="button" id="btn" value="浏览器版本信息" />
 <br/><br/>
 
-<div id="aa2"></div>
+<div id="box"></div>
 <br><br>
 <script type="text/javascript" src="tools.js"></script>
 <script>
-console.log(distinguishBetweenMobileAndPC())
+    console.log(client_info());
+    document.querySelector("#btn").onclick = function(){
+        var html = "",
+        browser = client_info();
+        html = "userAgent 内容: <BR/>" + navigator.userAgent + "<BR/><BR/>"
+                + "是否为移动终端: " + browser.versions.mobile + "<BR/>"
+                + "是否 ios: " + browser.versions.ios + "<BR/>"
+                + "是否 android: " + browser.versions.android + "<BR/>"
+                + "当前浏览器: " + browser.bUA + "<BR/>";
+        document.querySelector("#box").innerHTML = html;
+    };
 </script>
 
 </body>
