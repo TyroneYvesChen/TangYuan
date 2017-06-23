@@ -175,6 +175,19 @@
         }
 
 
+
+        //时间戳转日期，同名类库moment功能强大- -...要是多功能可以用这个...
+        function moment(timestamp) {
+            var now = new Date(timestamp);
+            var year=now.getYear();
+            var month=now.getMonth()+1;
+            var date=now.getDate();
+            var hour=now.getHours();
+            var minute=now.getMinutes();
+            var second=now.getSeconds();
+            return "20"+year+"-"+month+"-"+date+" "+hour+":"+minute+":"+second;
+        }
+
     
 
 
