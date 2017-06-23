@@ -177,7 +177,7 @@
 
 
         //时间戳转日期，同名类库moment功能强大- -...要是多功能可以用这个...
-        function moment(timestamp) {
+        function momentFn(timestamp) {
             var now = new Date(timestamp);
             var year=now.getYear();
             var month=now.getMonth()+1;
@@ -188,7 +188,38 @@
             return "20"+year+"-"+month+"-"+date+" "+hour+":"+minute+":"+second;
         }
 
-    
+
+
+
+
+        /**
+         * 通用验证函数
+         * 对象验证规则
+         * 如果不需要验证required:flase
+         * var schema = {
+            first: {
+                required:true
+            },
+            last: {
+                required:true
+            }
+        };
+        console.log(validate(schema, {first:'Bruce'})); // false
+        console.log(validate(schema, {first:'Bruce',last:'Wayne'})); // true
+         */
+        function validateFn(schema, values){
+            for(var field in schema) {
+                if(schema[field].required) {
+                    if(!values[field]) {
+                        return false;
+                    }
+                }
+            }
+            return true;
+        }
+
+
+
 
 
 
