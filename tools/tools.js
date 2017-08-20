@@ -244,58 +244,58 @@
         }
 
 
-	//事件绑定兼容处理
+	    //事件绑定兼容处理
         function addEvent(obj,type,handle){
-		try{ // Chrome、FireFox、Opera、Safari、IE9.0及其以上版本
-			obj.addEventListener(type,handle,false);
-		}catch(e){
-			try{ // IE8.0及其以下版本
-				obj.attachEvent('on' + type,handle);
-			}catch(e){ // 早期浏览器
-				obj['on' + type] = handle;
-			}
-		}
+            try{ // Chrome、FireFox、Opera、Safari、IE9.0及其以上版本
+                obj.addEventListener(type,handle,false);
+            }catch(e){
+                try{ // IE8.0及其以下版本
+                    obj.attachEvent('on' + type,handle);
+                }catch(e){ // 早期浏览器
+                    obj['on' + type] = handle;
+                }
+            }
         }
 
 
 
-	//选取(picking)和反选(rejecting)对象的属性
-	function pick(obj, keys) {
-	    return keys.map(k => k in obj ? {[k]: obj[k]} : {})
-		       .reduce((res, o) => Object.assign(res, o), {});
-	}
+        //选取(picking)和反选(rejecting)对象的属性
+        function pick(obj, keys) {
+            return keys.map(k => k in obj ? {[k]: obj[k]} : {})
+                   .reduce((res, o) => Object.assign(res, o), {});
+        }
 
 
-	/**
-         const row = {
-	    'accounts.id': 1,
-	    'client.name': 'John Doe',
-	    'bank.code': 'MDAKW213'
-	};
+        /**
+             const row = {
+                'accounts.id': 1,
+                'client.name': 'John Doe',
+                'bank.code': 'MDAKW213'
+            };
 
-	const table = [
-	    row,
-	    {'accounts.id': 3, 'client.name': 'Steve Doe', 'bank.code': 'STV12JB'}
-	];
+            const table = [
+                row,
+                {'accounts.id': 3, 'client.name': 'Steve Doe', 'bank.code': 'STV12JB'}
+            ];
 
-	pick(row, ['client.name']); // 取到了 client name
+            pick(row, ['client.name']); // 取到了 client name
 
-	table.map(row => pick(row, ['client.name'])); // 取到了一系列 client name
+            table.map(row => pick(row, ['client.name'])); // 取到了一系列 client name
          */
-	
-	function reject(obj, keys) {
-	    return Object.keys(obj)
-		.filter(k => !keys.includes(k))
-		.map(k => ({[k]: obj[k]}))
-		.reduce((res, o) => Object.assign(res, o), {});
-	}
 
-	// 或者, 利用 pick
-// 	function reject(obj, keys) {
-// 	    const vkeys = Object.keys(obj)
-// 		.filter(k => !keys.includes(k));
-// 	    return pick(obj, vkeys);
-// 	}
+        function reject(obj, keys) {
+            return Object.keys(obj)
+            .filter(k => !keys.includes(k))
+            .map(k => ({[k]: obj[k]}))
+            .reduce((res, o) => Object.assign(res, o), {});
+        }
 
-	//reject({a: 2, b: 3, c: 4}, ['a', 'b']); // => {c: 4}
+            // 或者, 利用 pick
+        // 	function reject(obj, keys) {
+        // 	    const vkeys = Object.keys(obj)
+        // 		.filter(k => !keys.includes(k));
+        // 	    return pick(obj, vkeys);
+        // 	}
+
+        //reject({a: 2, b: 3, c: 4}, ['a', 'b']); // => {c: 4}
 
