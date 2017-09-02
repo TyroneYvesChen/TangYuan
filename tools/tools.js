@@ -299,3 +299,35 @@
 
         //reject({a: 2, b: 3, c: 4}, ['a', 'b']); // => {c: 4}
 
+
+        //函数式编程
+		function extract(filterFn, mapFn, col) {
+		  return col.filter(filterFn).map(mapFn)
+		}
+
+
+		function extract(filterFn, mapFn) {
+		  return function process(col) {
+		    return col.filter(filterFn).map(mapFn)
+		  }
+		}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
