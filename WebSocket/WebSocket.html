@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>WebSocket</title>
+</head>
+<body>
+
+<script src="sockjs-0.3.min.js"></script>
+<script type="text/javascript">
+    var websocket;
+    if ('WebSocket' in window) {
+        websocket = new WebSocket("${ws_host_address}/zmq");
+    } else if ('MozWebSocket' in window) {
+        websocket = new MozWebSocket("${ws_host_address}/zmq");
+    } else {
+        websocket = new SockJS("${ws_host_address}/js/zmq");
+    }
+    websocket.onopen = function () {
+        console.log('Info: WebSocket connection opened.');
+        if (websocket != null) {
+            var msg = {
+                url:'/socketUrl',
+                params:{
+                    id : 1,
+                    name : 'jack',
+                    password : '123456'
+                }
+            }
+            websocket.send(JSON.stringify(msg));
+        } else {
+            alert('WebSocket connection not established, please connect.');
+        }
+    };
+    websocket.onmessage = function(evnt) {
+        var json = JSON.parse(event.data);
+        console.log(json);
+    };
+    websocket.onclose = function () {
+        console.log('Info: WebSocket connection closed.');
+    };
+</script>
+</body>
+</html>
