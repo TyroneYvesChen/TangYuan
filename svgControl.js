@@ -1,7 +1,16 @@
 /**
  * Created by wisdom on 2017/9/4.
  */
-// !(function ($) {
+!(function ($) {
+    function SvgControl() {
+
+    }
+    var svgControl = new SvgControl();
+    $.extend({
+        svgControl : svgControl
+    });
+
+    var _svgControl = SvgControl.prototype;
     // SVG缩放平移////////////////////////////////////////////
     // 操作SVG缩放,in->-0.1,out->0.1;in-fasle,out-true
     function operationSvgZoom(e, status) {
@@ -112,8 +121,4 @@
             }
         });
     }
-
-
-
-
-// })(jQuery)
+})(jQuery)
