@@ -636,7 +636,7 @@
 		var dwidth = SINGLE_SVGWEIGHT / 2;
 		var dheight = MULTI_SVGHEIGHT;
 		//
-		svgmap.attr("displayscale", computeSVGDisplayScale(width, dwidth,
+		svgmap.attr("svgDom", computeSVGDisplayScale(width, dwidth,
 				height, dheight));
 		svgmap.attr("id", "Multi_" + replaceDotInId(mapcode));
 		svgmap.attr("width", dwidth);

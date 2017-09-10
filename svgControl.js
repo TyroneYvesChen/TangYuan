@@ -11,41 +11,55 @@
     });
 
     var _svgControl = SvgControl.prototype;
+
+
+    _svgControl.operationSvgScale = function (svg){
+        var svgDom = $(svg).
+        scale = svgDom.data("zoom");
+        if (scale <= 0.1) return;
+        var newScale = svgScale(svgDom, scale, step);
+        svgDom.data("zoom", scale);
+    }
+
+
+
     // SVG缩放平移////////////////////////////////////////////
     // 操作SVG缩放,in->-0.1,out->0.1;in-fasle,out-true
-    function operationSvgZoom(e, status) {
-        var svg = e.parents(".widget-body").find("svg");
-        var zoom = e.parent().data("zoom");
-        var step = status ? 0.1 : (-0.1);
-        if (zoom <= 0.1 && status)
-        // if ((zoom >= 10 && !status) || (zoom <= 0.1 && status))
-            return;
-        var scale = svgZoom(svg, zoom, step);
-    console.log(e);
-    e.parent().data("zoom", scale);
-    }
+    // function operationSvgZoom(e, status) {
+    //     var svg = e.parents(".widget-body").find("svg");
+    //     var zoom = e.parent().data("zoom");
+    //     var step = status ? 0.1 : (-0.1);
+    //     if (zoom <= 0.1 && status)
+    //     // if ((zoom >= 10 && !status) || (zoom <= 0.1 && status))
+    //         return;
+    //     var scale = svgZoom(svg, zoom, step);
+    // console.log(e);
+    // e.parent().data("zoom", scale);
+    // }
     // SVG缩放具体方法
-    function svgZoom(svg, zoom, step) {
+    function svgScale(svgDom, oldScale) {
+        var step = 0.1;
         // 控制
-        var scale = parseInt((zoom - step + 0.0001) * 10) / 10.0;
-        var translate = svg.find("g#MapElement").attr("transform");
+        var scale = parseInt((oldScale + 0.0001) * 1000000) / 1000000.0;
+        var translate = svgDom.find("g#MapElement").attr("transform");
 
-        var width = svg.attr("width"); // viewBox会改变大小width,height大小
-        var height = svg.attr("height");
+        // viewBox会改变大小width,height大小
+        var width = svgDom.attr("width"); 
+        var height = svgDom.attr("height");
 
-        var svgid = svg.attr("id");
+        var svgid = svgDom.attr("id");
 
         var vwidth = SVG(svgid).viewbox().width * step / 2;
         var vheight = SVG(svgid).viewbox().height * step / 2;
 
 
-        var newtranslate = panandZoom(parseInt(vwidth), parseInt(vheight),
+        var newtranslate = panAndScale(parseInt(vwidth), parseInt(vheight),
             scale, translate);
-        svg.find("#Backgroundcolor").attr("transform", newtranslate);
-        svg.find("g#MapElement").attr("transform", newtranslate);
+        svgDom.find("#Backgroundcolor").attr("transform", newtranslate);
+        svgDom.find("g#MapElement").attr("transform", newtranslate);
 
-        svg.attr("width", width);
-        svg.attr("height", height);
+        svgDom.attr("width", width);
+        svgDom.attr("height", height);
         return scale;
     }
     // svg恢复初始状态
@@ -57,7 +71,7 @@
         mapzoom.data("zoom", 1);
     }
 
-    function panandZoom(x, y, scale, translate) {
+    function panAndScale(x, y, scale, translate) {
         if (translate == undefined)
             return "translate(" + x + "," + y + ") scale(" + scale + ")";
         // var old = translate.replace("translate(", "").replace(")",
