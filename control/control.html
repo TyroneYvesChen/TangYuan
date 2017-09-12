@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title></title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <link href="style.css" type="text/css" rel="stylesheet"/>
+	  <style>
+
+		  body {
+			  background-color: #fff;
+			  color: #4c4c4c;
+			  font-size: 12px;
+			  height: 100%;
+			  margin: 0;
+			  min-height: 600px;
+			  min-width: 960px;
+			  overflow: hidden;
+			  padding: 0;
+		  }
+	  </style>
+  </head>
+  <body>
+
+  <div id="wocao" style="position: relative;clear: both"></div>
+
+<div style="transition: bottom 0.3s ease-out 0.3s; bottom: 20px; right: 10px; top: auto; left: auto;
+position: absolute; z-index: 10; -moz-user-select: none;" class="BMap_stdMpCtrl">
+	<div class="BMap_stdMpZoom" style="height: 227px; width: 65px;top:0">
+		<div class="BMap_button BMap_stdMpZoomIn" title="放大一级"></div>
+		<div class="BMap_button BMap_stdMpZoomOut" title="缩小一级"></div>
+		<div class="BMap_stdMpSlider">
+			<div class="BMap_stdMpSliderBgTop"></div>
+			<div class="BMap_stdMpSliderBgBot" style="height: 121px;"></div>
+			<div class="BMap_stdMpSliderMask" title="放置到此级别"></div>
+			<div class="BMap_stdMpSliderBar" title="拖动缩放" style="cursor: grab; top: 44px;"></div>
+		</div>
+	</div>
+</div>
+
+
+  <script src="../../js/jquery-3.2.1.js"></script>
+  <script src="progressBar.js"></script>
+  <script>
+	  $("#wocao").progressBar({
+		  callBack: function (data) {
+			  console.log(data)
+		  }
+	  })
+  </script>
+</body>
+</html>

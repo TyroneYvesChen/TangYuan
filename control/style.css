@@ -1,0 +1,79 @@
+
+
+.BMap_button {
+    cursor: pointer;
+}
+
+.BMap_stdMpCtrl{
+    width: 65px;
+    height: 227px;
+    display: inline-block;
+    -moz-user-select: none;
+    z-index: 10;
+}
+
+.BMap_stdMpCtrl div {
+    position: absolute;
+}
+
+.BMap_stdMpZoom {
+    overflow: hidden;
+    height: 227px;
+    width: 65px;
+    top:0;
+}
+.BMap_stdMpZoom .BMap_button {
+    background-image: url("standard2.png");
+    background-repeat: no-repeat;
+    height: 24px;
+    left: 30px;
+    overflow: hidden;
+    width: 26px;
+    z-index: 10;
+}
+
+.BMap_stdMpZoomIn {
+    background-position: 0 0;
+}
+.BMap_stdMpZoomOut {
+    background-position: 0 -204px;
+    height: 23px;
+    top: 204px;
+}
+.BMap_stdMpSlider {
+    left: 30px;
+    overflow: hidden;
+    top: 24px;
+    width: 26px;
+    height: 180px;
+}
+.BMap_stdMpSliderBgTop {
+    background: rgba(0, 0, 0, 0) url("standard2.png") no-repeat scroll 0 -24px;
+    left: 0;
+    overflow: hidden;
+    width: 26px;
+    height: 180px;
+}
+.BMap_stdMpSliderBgBot {
+    background: rgba(0, 0, 0, 0) url("standard2.png") no-repeat scroll -53px 0;
+    bottom: 10px;
+    height: 1px;
+    left: 11px;
+    overflow: hidden;
+    width: 4px;
+}
+
+.BMap_stdMpSliderMask {
+    cursor: pointer;
+    height: 100%;
+    left: 0;
+    width: 26px;
+}
+.BMap_stdMpSliderBar {
+    background: rgba(0, 0, 0, 0) url("standard2.png") no-repeat scroll -26px -68px;
+    height: 11px;
+    left: 3px;
+    overflow: hidden;
+    top: 80px;
+    width: 20px;
+}
