@@ -2,7 +2,7 @@
     function ProgressBar(element, options) {
         this.tag = false;
         this.oy = 0;
-        this.top = 165;
+        this.top = 160;
         this.bgTop = 0;
         this.options = options;
         this.init(element);
@@ -12,7 +12,7 @@
 
     _progressBar.init = function (element) {
         var dom = this.createDom();
-        $(dom).find(".BMap_stdMpSliderBar").css("top", this.top);
+        $(dom).find(".BMap_stdMpSliderBar").css("top", this.top + 5);
         this.mouseDownEvent(dom);
         this.mouseUpEvent();
         this.mouseMoveEvent(dom);
@@ -63,25 +63,14 @@
         var _this = this;
         $(dom).mousemove(function(e) {//鼠标移动
             var barHeight = _this.barHeight;
-            if (_this.tag) {
-                _this.bgTop = $(dom).find('.BMap_stdMpSliderMask').offset().top;
-                _this.top = e.pageY - _this.bgTop * 1.5;
-                if (_this.top < 0) {
-                    _this.top = 0;
-                    return
-                }else if (_this.top > barHeight) {
-                    _this.top = barHeight;
-                }
-                var bgBotTop = 160-_this.top;
-
-                $(dom).find('.BMap_stdMpSliderBar').css('top', _this.top + 5);
-                $(dom).find('.BMap_stdMpSliderBgBot').height(bgBotTop);
-                var percent = parseInt((bgBotTop/barHeight)*100);
-                _this.params.percent = percent;
-                _this.options.callBack && typeof _this.options.callBack == "function" && _this.options.callBack(_this.params);
-            }
-            e.preventDefault();
-            e.stopPropagation();
+            var options = {
+                event: e,
+                ele: dom,
+                that: _this,
+                isMove: true,		//是否是拖拽
+                willMove: 0				//用于加减按钮，每次变化百分比
+            };
+            if (_this.tag) barControl(options);
             //防止选择内容--当拖动鼠标过快时候，弹起鼠标，bar也会移动，修复bug
             window.getSelection ? window.getSelection().removeAllRanges() : document.selection.empty();
         });
@@ -91,64 +80,80 @@
         var _this = this;
 
         //鼠标点击改变进度条
-        $(dom).find('.BMap_stdMpSliderMask').click(function(e) {
+        $(dom).find('.BMap_stdMpSliderMask').on("click", function(e) {
             var options = {
                 event: e,
                 ele: dom,
-                _this: _this,
-                isMove: false
+                that: _this,
+                isMove: false,		//是否是拖拽
+                willMove: 0				//用于加减按钮，每次变化百分比
             };
-            barControl(options)
+            if (!_this.tag) barControl(options);
+            
         });
 
         //加号
-        $(dom).find('.BMap_stdMpZoomIn').on("click", function () {
-
+        $(dom).find('.BMap_stdMpZoomIn').on("click", function (e) {
+        	_this.top = _this.top - _this.barHeight * 10 / 100;
+        	barMove(dom, _this, false);
         })
 
         //减号
         $(dom).find('.BMap_stdMpZoomOut').on("click", function () {
-
+			_this.top = _this.top - _this.barHeight * -10 / 100;
+        	barMove(dom, _this, false);
         })
     };
 
     function barControl(options) {
         var e = options.event,
             dom = options.ele,
-            _this = options._this,
+            _this = options.that,
             isMove = options.isMove;
-        if (!_this.tag) {
-            createDistance(e, dom, _this);
-            barMove(dom, _this, isMove);
-        }
+            //暂时不开放加减多少可配置
+            // willMove = options.willMove && typeof options.willMove === "number"
+            // ? options.willMove 
+            // : 0;
+        
+        fixDistance(e, dom, _this);
+        barMove(dom, _this, isMove);
+
         e.preventDefault();
         e.stopPropagation();
     }
 
-    function createDistance(e, dom, _this) {
-        var barHeight = _this.barHeight;
+    function fixDistance(e, dom, _this) {
         _this.bgTop = $(dom).find('.BMap_stdMpSliderMask').offset().top;
         _this.top = e.pageY - _this.bgTop * 1.5;
-        if (_this.top <= 0) {
-            _this.top = 0;
-        }else if (_this.top > barHeight) {
-            _this.top = barHeight;
-        }
+        topVerify(_this);
     }
 
     function barMove(dom, _this, isMove) {
-        var bgBotTop = 160-_this.top,
-            barHeight = _this.barHeight;
+        var barHeight = _this.barHeight;
+        topVerify(_this);
+     	bgBotTop = barHeight-_this.top;
+     	var bgBot = $(dom).find('.BMap_stdMpSliderBgBot');
+
         $(dom).find('.BMap_stdMpSliderBar').css('top', _this.top + 5);
         if (isMove){
-            $(dom).find('.BMap_stdMpSliderBgBot').height(bgBotTop);
+            bgBot.height(bgBotTop);
         }else {
-            $(dom).find('.BMap_stdMpSliderBgBot').animate({height:bgBotTop},300);
+        	bgBot.stop();
+            bgBot.animate({height:bgBotTop},300);
         }
 
         var percent = parseInt((bgBotTop/barHeight)*10000)/100;
         _this.params.percent = percent;
         _this.options.callBack && typeof _this.options.callBack == "function" && _this.options.callBack(_this.params);
+    }
+
+    function topVerify(_this){
+    	var barHeight = _this.barHeight;
+    	if (_this.top <= 0) {
+            _this.top = 0;
+        }else if (_this.top > barHeight) {
+            _this.top = barHeight;
+        }
     }
 
     $.fn.progressBar = function (options) {
