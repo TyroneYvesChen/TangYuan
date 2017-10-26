@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>iframe自适应</title>
+</head>
+<style>
+    iframe{
+        width: 100%;
+    }
+</style>
+<body>
+<iframe src="" frameborder="0"></iframe>
+
+<script>
+    // iframe 的宽高比为 9:16 就好
+    window.onload = window.onresize = function () { resizeIframe(); }
+    var resizeIframe = function () {
+        var bodyw=document.body.clientWidth;
+        for (var ilength=0;ilength<=document.getElementsByTagName("iframe").length;ilength++) {
+            document.getElementsByTagName("iframe")[ilength].height = bodyw*9/16;//设定高度
+        }
+    }
+</script>
+</body>
+</html>
