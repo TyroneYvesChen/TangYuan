@@ -306,11 +306,15 @@
 		}
 
 
-		function extract(filterFn, mapFn) {
+		function extract2(filterFn, mapFn) {
 		  return function process(col) {
 		    return col.filter(filterFn).map(mapFn)
 		  }
 		}
+
+
+        //null undefined 0 NaN 返回 false
+        export const isEmpty = n => n || n === !!n || n === n + n && ![~n][n]
 
 
 
