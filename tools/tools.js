@@ -313,7 +313,7 @@
 		}
 
 
-        //null undefined 0 NaN 返回 false
+        //null undefined 0 NaN 返回 false     （B大出品）
         export const isEmpty = n => n || n === !!n || n === n + n && ![~n][n]
 
 
