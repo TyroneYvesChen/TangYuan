@@ -1,0 +1,26 @@
+{
+  "name": "n-crawler",
+  "version": "0.0.1",
+  "description": ":octocat: 一起学习 node crawler",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/coolfishstudio/N-Crawler.git"
+  },
+  "author": "Yves",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/coolfishstudio/N-Crawler/issues"
+  },
+  "homepage": "https://github.com/coolfishstudio/N-Crawler#readme",
+  "dependencies": {
+    "async": "^2.3.0",
+    "cheerio": "^0.22.0",
+    "iconv-lite": "^0.4.15",
+    "request": "^2.81.0",
+    "request-promise": "^4.2.2"
+  }
+}
